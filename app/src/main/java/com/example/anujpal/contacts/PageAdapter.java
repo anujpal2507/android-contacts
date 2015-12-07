@@ -32,8 +32,8 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 GroupFragment tabgrp = new GroupFragment();
                 return tabgrp;
             default:
-                PhoneFragment tabphn1 = new PhoneFragment();
-                return tabphn1;
+                GroupFragment tabgrp1 = new GroupFragment();
+                return tabgrp1;
         }
     }
 
