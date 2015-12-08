@@ -1,29 +1,31 @@
 package com.example.anujpal.contacts;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * Created by anujpal on 4/12/15.
  */
 public class ContactFragment extends Fragment {
 
-//    public static ContactFragment newInstance(){
-//        return new  ContactFragment();
-//    }
-    EditText name;
-    EditText phn;
-    EditText email;
-    Button save;
+    Button addContacts;
+    String phone;
     private ContactDatabase db;
+
     public ContactFragment(){
 
     }
@@ -31,39 +33,45 @@ public class ContactFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+//        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//        fragmentTransaction.detach(this).attach(this).commit();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.contacts, container, false);
-        name = (EditText)view.findViewById(R.id.name);
-        phn = (EditText)view.findViewById(R.id.phn);
-        email = (EditText)view.findViewById(R.id.email);
-        save = (Button)view.findViewById(R.id.save);
-       // db = new ContactDatabase(getActivity());
-        save.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View view1){
-               String contactName = name.getText().toString();
-               String contactPhone = phn.getText().toString();
-               String contactEmail = email.getText().toString();
+        db = new ContactDatabase(getContext());
+        final ArrayList<Contacts> contactsArrayList = db.getAllContacts();
+        ArrayList<String> namesList = new ArrayList<String>();
+        for(int i = 0;i<contactsArrayList.size();i++){
+            namesList.add(contactsArrayList.get(i).getName());
+//          namesList.add(contactsArrayList.get(i).getPhone());
+        }
 
-               if(contactName != null && contactPhone !=null ){
-                   db = new ContactDatabase(getContext());
-                   db.addContact(new Contacts(contactName,contactPhone,contactEmail));
-               }
-               name.setText("");
-               phn.setText("");
-               email.setText("");
-
-                List<Contacts> contactsList= db.getAllContacts();
-                for (Contacts cn : contactsList) {
-                    String log = "Id: "+cn.getId() +" ,Name: " + cn.getName() + " ,Phone: " + cn.getPhone()
-                            + " Email" + cn.getEmail();
-                    // Writing Contacts to log
-                    Log.i("Name: ", log);
-                }
-                //String log = "Id: "+cn.getID()+" ,Name: " + cn.getName() + " ,Phone: " + cn.getPhoneNumber();
+        ListView listView = (ListView)view.findViewById(R.id.contactList);
+        ArrayAdapter ad = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,namesList);
+        listView.setAdapter(ad);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                phone = contactsArrayList.get(position).getPhone();
+                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
+                Log.i("num", phone);
+                Log.i("position",Integer.toString(position));
+            }
+        });
+        addContacts = (Button)view.findViewById(R.id.addContact);
+        addContacts.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view1) {
+                Intent intent = new Intent(getContext(),AddContact.class);
+                startActivity(intent);
+                //AddContacts addContacts = new AddContacts();
+//                Fragment addContacts = new AddContacts();
+//                FragmentManager fm = getFragmentManager();
+//                FragmentTransaction transaction = fm.beginTransaction();
+//                transaction.replace(R.layout.add_contacts,addContacts);
+//                transaction.commit();
             }
         });
         return view;

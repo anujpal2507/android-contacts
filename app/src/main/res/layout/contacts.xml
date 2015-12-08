@@ -8,27 +8,39 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="In Contacts"/>
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Name"/>
-    <EditText
-        android:id="@+id/phn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone Number"
-        android:inputType="number"/>
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="e-mail"
-        android:inputType="textEmailAddress"/>
     <Button
-        android:id="@+id/save"
+        android:id="@+id/addContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:gravity="center"/>
+        android:text="Add Contact"/>
+    <!--<EditText-->
+        <!--android:id="@+id/name"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Name"/>-->
+    <!--<EditText-->
+        <!--android:id="@+id/phn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="Phone Number"-->
+        <!--android:inputType="number"/>-->
+    <!--<EditText-->
+        <!--android:id="@+id/email"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:hint="e-mail"-->
+        <!--android:inputType="textEmailAddress"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/save"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Save"-->
+        <!--android:gravity="center"/>-->
+
+    <ListView
+        android:id="@+id/contactList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </ListView>
+
 </LinearLayout>

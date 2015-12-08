@@ -63,9 +63,9 @@ public class ContactDatabase extends SQLiteOpenHelper {
         return contacts;
     }
 // Get All Contacts
-    public List<Contacts> getAllContacts(){
-        List<Contacts> contactsList = new ArrayList<Contacts>();
-        String selectQuery = "SELECT * FROM " + DATABASE_TABLE;
+    public ArrayList<Contacts> getAllContacts(){
+        ArrayList<Contacts> contactsList = new ArrayList<Contacts>();
+        String selectQuery = "SELECT * FROM " + DATABASE_TABLE + " ORDER BY " + COLUMN_NAME + " ASC";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery,null);
         if(cursor.moveToFirst()){
@@ -109,57 +109,4 @@ public class ContactDatabase extends SQLiteOpenHelper {
                 new String[]{String.valueOf(contacts.getId())});
         db.close();
     }
-
-
-
-
-//    public boolean insertContact(String name, String phone, String email){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("name",name);
-//        contentValues.put("phone",phone);
-//        contentValues.put("email", email);
-//        db.insert("contacts", null, contentValues);
-//        return true;
-//    }
-//
-//    public Cursor getData(int id){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor res = db.rawQuery("select * from contacts id="+id+"",null);
-//        return res;
-//    }
-//
-//    public int numberOfRows(){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        int numRows = (int) DatabaseUtils.queryNumEntries(db,dbTable);
-//        return numRows;
-//    }
-//
-//    public boolean updateContact(Integer id, String name, String phone, String email){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("name",name);
-//        contentValues.put("phone",phone);
-//        contentValues.put("email", email);
-//        db.update("contacts",contentValues,"id=?", new String[]{Integer.toString(id)});
-//        return true;
-//    }
-//
-//    public Integer deleteContact(Integer id){
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        return db.delete("contacts","id=? ", new String[]{Integer.toString(id)});
-//    }
-//
-//    public ArrayList<String> getAllContacts(){
-//        ArrayList<String> arrayList = new ArrayList<String>();
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("select * from contacts",null);
-//        cursor.moveToFirst();
-//
-//        while (cursor.isAfterLast()==false ){
-//            arrayList.add(cursor.getString(cursor.getColumnIndex(dbColumnName)));
-//            cursor.moveToNext();
-//        }
-//        return arrayList;
-//    }
 }

@@ -1,7 +1,5 @@
 package com.example.anujpal.contacts;
 
-
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
@@ -20,10 +18,6 @@ import android.widget.Toast;
 
 public class PhoneFragment extends Fragment {
 
-//    public static PhoneFragment newInstance(){
-//        return new  PhoneFragment();
-//    }
-
     Button callBtn;
     EditText dialEditText;
 
@@ -34,8 +28,6 @@ public class PhoneFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-
-       // call();                                                       //calling default call method of android
     }
 
     @Override
@@ -61,14 +53,4 @@ public class PhoneFragment extends Fragment {
         });
         return view;
     }
-
-//    public void call(){                                               //for default call using phone
-//        try{
-//            Intent intentCall = new Intent(Intent.ACTION_CALL);
-//            startActivity(intentCall);
-//        }
-//        catch (ActivityNotFoundException activityException){
-//            Log.e("Hello Android Dialer","Call Failed",activityException);
-//        }
-//    }
 }
