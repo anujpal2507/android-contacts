@@ -21,6 +21,9 @@
 
         <activity
             android:name=".AddContact"/>
+
+        <activity
+            android:name=".ContactDetails"/>
     </application>
     <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 </manifest>

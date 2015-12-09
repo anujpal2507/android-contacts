@@ -23,7 +23,9 @@ import java.util.ArrayList;
 public class ContactFragment extends Fragment {
 
     Button addContacts;
+    String name;
     String phone;
+    String email;
     private ContactDatabase db;
 
     public ContactFragment(){
@@ -56,7 +58,10 @@ public class ContactFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 phone = contactsArrayList.get(position).getPhone();
-                startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
+                Intent detailContact = new Intent(getContext(),ContactDetails.class);
+                detailContact.putExtra("phone", phone);
+                startActivity(detailContact);
+               // startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone)));
                 Log.i("num", phone);
                 Log.i("position",Integer.toString(position));
             }
@@ -66,6 +71,7 @@ public class ContactFragment extends Fragment {
             public void onClick(View view1) {
                 Intent intent = new Intent(getContext(),AddContact.class);
                 startActivity(intent);
+
                 //AddContacts addContacts = new AddContacts();
 //                Fragment addContacts = new AddContacts();
 //                FragmentManager fm = getFragmentManager();
